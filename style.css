@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&display=swap');
+*{
+	box-sizing: border-box;
+}
+
+body{
+	/*don vi vh se thay doi theo chieu cao khi thu nho phong to trinh duyet, ct tinh doi ra px nen k doi truc tiep*/
+	height: 100vh;
+	margin: 0;
+	font-family: 'Delius Swash Caps', cursive;
+	background-image: linear-gradient(0deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 30px;
+}
+
+.music-container{
+	background-color: #fff;
+	border-radius: 15px;
+	box-shadow: 0 20px 20px 0 rgb(49 255 192 / 34%);
+	display: flex;
+	/*khoang cach cua content cach border*/
+	padding: 20px 30px;
+	/*de position la relative vi ty nua se config cac components ben trong no*/
+	position: relative;
+	/*tang margin len de cach chu Music Player ra*/
+	margin: 100px 0;
+	/*muc do uu tien thu tu hien thi ra mat truoc*/
+	z-index:10 ;
+}
+
+.img-container{
+	position: relative;
+	width: 110px;
+}
+
+/*chen noi dung gi do vao sau component*/
+.img-container::after{
+	/*cu the la chen 1 lo trong hinh tron mau trang vao giua cai hinh de lam tam dia~*/
+	content: "";
+	background-color: #fff;
+	height: 20px;
+	width: 20px;
+	/*vi tri se dc abs so vs img-container*/
+	position: absolute;
+	/*cho cach sang trai*/
+	left: 50%;
+	/*cho cach phia duoi*/
+	bottom: 50%;
+	/*van chua vao chinh giua, nen phai config them*/
+	transform: translate(-46%, -87%);
+	/*cho tam tu hinh vuong sang hinh tron*/
+	border-radius: 50%;
+}
+
+.img-container img{
+	/*tao kich co anh 110x110*/
+	width: inherit;
+	height: 110px;
+	/*lam no thanh hinh tron*/
+	border-radius: 50%;
+	/*set khuon vien cua hinh anh bao phu theo kich co*/
+	object-fit: cover;
+	/*dat vi tri abs so vs thang cha img-container de config vi tri, hinh se bi nhay ra khoi khung*/
+	/*chua hieu ro*/
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	/*chua hieu ro*/
+
+	/*lam hieu ung xoay*/
+	animation: rotate 3s linear infinite;
+
+	/*lam dung chuyen dong hieu ung xoay*/
+	animation-play-state: paused;
+}
+
+.music-container.play .img-container img{
+	animation-play-state: running;
+}
+
+@keyframes rotate{
+	from{
+		transform: rotate(0deg);
+	}
+	to{
+		transform: rotate(360deg);
+	}
+}
+
+.navigation{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1;
+}
+
+/*config cho cac btn*/
+.action-btn{
+	/*de y ki thi background-color(mau nen) no k phai mau trang nen phai chuyen ve mau trang*/
+	background-color: #fff;
+	border: 0;
+	/*doi mau(mau cua nut) ve mau xam*/
+	color: #d3a7d6;
+	/*tang kich co cua cac nut*/
+	font-size: 20px;
+	/*thay doi con tro khi di chuot vao*/
+	cursor: pointer;
+	/*can chinh 1 chut theo y dinh*/
+	padding: 10px;
+	margin: 0 20px;
+}
+
+/*config nut play*/
+.action-btn-big{
+	color:#a582af;
+	font-size: 30px;
+}
+
+/*tat che do focus*/
+.action-btn:focus{
+	outline: 0;
+}
+
+/*config ten bai hat*/
+.music-info{
+	/*cho nen sang mau trang*/
+	background-color: rgb(247 222 242 / 50%);
+	/*chinh khung nen sang dang tron` va mau chi cho top va right*/
+	border-radius: 15px 15px 0 0;
+	position: absolute;
+	top: 0;
+	left: 20px;
+	width: calc(100% - 40px);
+	/*khi bai hat chua chay thi k hien ten, va khi chay thi hien ten*/
+	opacity: 0;
+	transform: translateY(0%);
+	/*cho no ra vi tri minh muon la o giua phia tren*/
+	padding: 10px 10px 10px 150px;
+	/*pop up bang transition*/
+	transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+}
+
+.music-info h4{
+	margin: 0;
+}
+
+.music-container.play .music-info{
+	/*khi chay thi hien*/
+	opacity: 1;
+	transform: translateY(-100%);
+}
+
+/*config thanh tien trinh*/
+.progress-container{
+	background:#fff ;
+	border-radius: 5px;
+	cursor: pointer;
+	margin: 10px 0;
+	/*hien thi ra thanh 4px*/
+	height: 4px;
+	width: 100%;
+}
+
+/*config muc' tien trinh*/
+.progress{
+	background-color: #fb7ac4;
+	border-radius: 5px;
+	height: 100%;
+	/*set tam ve 0 de mac dinh chua chay tien trinh*/
+	width: 0%;
+	transition: width 0.1s linear;
+}
+
+.progress:hover{
+	border: 2px solid #e650c9;
+}
